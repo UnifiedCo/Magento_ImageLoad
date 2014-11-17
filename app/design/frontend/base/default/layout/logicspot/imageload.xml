@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <block type="core/template" name="logicspot.baseurl" as="baseurl" template="logicspot/imageload/baseurl.phtml" />
+        </reference>
+    </default>
+    <catalog_category_default>
+        <reference name="head">
+            <action method="addJs"><script>logicspot/imageload.js</script></action>
+        </reference>
+    </catalog_category_default>
+    <catalog_category_layered>
+        <reference name="head">
+            <action method="addJs"><script>logicspot/imageload.js</script></action>
+        </reference>
+    </catalog_category_layered>
+</layout>

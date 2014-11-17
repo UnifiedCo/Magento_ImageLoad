@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!--
+/**
+ *  LogicSpot_Imageload config xml file
+ *  Module will change image on category pages after hover. Requires jQuery
+ *
+ * @category    LogicSpot
+ * @package     LogicSpot_Imageload
+ * @copyright   Copyright (c) 2014 LogicSpot (http://www.logicspot.com)
+ * @author      Rich Kirk, Kamil Szewczyk <info@logicspot.com>
+ */
+-->
+<config>
+    <modules>
+        <LogicSpot_Imageload>
+            <version>2.1.0.1</version>
+        </LogicSpot_Imageload>
+    </modules>
+    <global>
+        <helpers>
+            <imageload>
+                <class>LogicSpot_Imageload_Helper</class>
+            </imageload>
+        </helpers>
+        <resources>
+            <imageload_setup>
+                <setup>
+                    <module>LogicSpot_Imageload</module>
+                    <class>Mage_Catalog_Model_Resource_Setup</class>
+                </setup>
+            </imageload_setup>
+        </resources>
+    </global>
+    <frontend>
+        <routers>
+            <imageload>
+                <use>standard</use>
+                <args>
+                    <module>LogicSpot_Imageload</module>
+                    <frontName>imageload</frontName>
+                </args>
+            </imageload>
+        </routers>
+        <layout>
+            <updates>
+                <imageload>
+                    <file>logicspot/imageload.xml</file>
+                </imageload>
+            </updates>
+        </layout>
+    </frontend>
+</config>
