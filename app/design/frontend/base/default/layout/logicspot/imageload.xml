@@ -2,7 +2,7 @@
 <layout version="0.1.0">
     <default>
         <reference name="head">
-            <block type="core/template" name="logicspot.baseurl" as="baseurl" template="logicspot/imageload/baseurl.phtml" />
+            <block type="core/template" name="logicspot.baseurl" as="baseurl" before="-" template="logicspot/imageload/baseurl.phtml" />
         </reference>
     </default>
     <catalog_category_default>

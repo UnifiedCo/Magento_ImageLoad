@@ -11,5 +11,15 @@
 
 
 class LogicSpot_Imageload_Helper_Data extends Mage_Core_Helper_Data {
+    const XML_PATH_ENABLE = 'logicspot_imageload/imageload/enable';
 
+    /**
+     * Determine if module is enabled.
+     *
+     * @return bool
+     */
+    public function isModuleEnabled()
+    {
+        return Mage::getStoreConfigFlag(self::XML_PATH_ENABLE);
+    }
 }

@@ -16,11 +16,13 @@ function toggleImage(container) {
         hiddenImg.show();
     }
 }
-
 if (isJqueryEnable() && (!isModernizrEnable() || (isModernizrEnable() && !Modernizr.touch))) {
     jQuery(document).ready(function($) {
         $(document).on({
             mouseenter: function () {
+                if (!IMAGELOAD_ENABLE) {
+                    return false;
+                }
                 var container = $(this).find('a.product-image');
                 container.addClass('hover');
                 //if there is no image loaded, load using ajax
