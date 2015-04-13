@@ -1,0 +1,17 @@
+{
+  "name": "logicspot/imageload",
+  "description": "Simple module for lazy loading different image after hover on product lists",
+  "type": "magento-module",
+  "homepage": "http://logicspot.com",
+  "license": "GPL-3.0",
+  "version": "0.1.0",
+  "authors": [
+    {
+      "name": "LogicSpot",
+      "email": "support@logicspot.com"
+    }
+  ],
+  "require":{
+    "logicspot/core":"*"
+  }
+}

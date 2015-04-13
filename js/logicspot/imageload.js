@@ -1,3 +1,19 @@
+/**
+ * LogicSpot_Imageload
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the GNU General Public License v3.0
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.gnu.org/licenses/gpl-3.0.txt
+ *
+ * @category    LogicSpot
+ * @package     LogicSpot_Imageload
+ * @copyright   Copyright (c) 2015 LogicSpot (http://www.logicspot.com)
+ * @license     http://www.gnu.org/licenses/gpl-3.0.txt GNU General Public License v3.0
+ */
+
 function isJqueryEnable() {
     return !(typeof jQuery === "undefined");
 }
@@ -5,7 +21,7 @@ function isModernizrEnable() {
     return !(typeof Modernizr === "undefined");
 }
 /**
- * Function that replaces current src with the one stored in data storage, and saves old for ruther processing
+ * Function that replaces visible image with the retrieved hidden one.
  * @param container
  */
 function toggleImage(container) {
@@ -28,7 +44,7 @@ if (isJqueryEnable() && (!isModernizrEnable() || (isModernizrEnable() && !Modern
                 //if there is no image loaded, load using ajax
                 if (!container.hasClass('img-loaded')) {
                     var url = container.attr('href');
-                    // Create new offscreen image to get it's actual width and height
+                    // Create new offscreen image to get it's actual width and height (needed for responsive layouts)
                     var testImage = new Image();
                     testImage.src = container.find('img').attr("src");
                     var width = testImage.width;
