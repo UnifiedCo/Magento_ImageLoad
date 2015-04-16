@@ -6,6 +6,7 @@ By default module will show SECOND image from image gallery, but it's a possibil
 ##Features
 - Lazy loading of hover images - images will load only once, and only after product hover
 - You can set custom image as hover one, or leave functionality as default and show the Second image in gallery
+- Responsive websites ready - hover image will always have resolution of original loaded image no matter of actual size of screen
 
 ##Requirements
 This module requires jQuery to run.
@@ -26,6 +27,14 @@ If you're using custom package for templates you also need to copy all files fro
 app/design/frontend/base/default/template/logicspot into your package templates folder.
  
 After installing module, logout and login into admin and clear Magento cache.
+
+##Custom themes
+If you're using heavily modified theme which don't have standard magento "product-image" class added to images on product list you need to modify 
+the imageload.js file to match your DOM structure. Moreover if any of your modules is used to replace current product image with color swatches
+make sure the ImageLoad module works correctly.
+
+##Showcase
+![Hover images](http://i.imgur.com/lUWCnle.gif)
 
 ##License
 This module is distributed under GNU General Public License v3.0. Full text of the License can be found in LICENSE.txt file
