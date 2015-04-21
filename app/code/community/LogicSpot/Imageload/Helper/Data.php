@@ -1,5 +1,4 @@
-<?xml version="1.0"?>
-<!--
+<?php
 /**
  * LogicSpot_Imageload
  *
@@ -15,15 +14,21 @@
  * @copyright   Copyright (c) 2015 LogicSpot (http://www.logicspot.com)
  * @license     http://www.gnu.org/licenses/gpl-3.0.txt GNU General Public License v3.0
  */
--->
-<config>
-    <modules>
-        <LogicSpot_Imageload>
-            <active>true</active>
-            <codePool>community</codePool>
-            <depends>
-                <LogicSpot_Core />
-            </depends>
-        </LogicSpot_Imageload>
-    </modules>
-</config>
+/**
+ * Main helper class for LogicSpot Imageload module
+ *
+ * Class LogicSpot_Imageload_Helper_Data
+ */
+class LogicSpot_Imageload_Helper_Data extends Mage_Core_Helper_Data {
+    const XML_PATH_ENABLE = 'logicspot_imageload/imageload/enable';
+
+    /**
+     * Determine if module is enabled.
+     *
+     * @return bool
+     */
+    public function isModuleEnabled()
+    {
+        return Mage::getStoreConfigFlag(self::XML_PATH_ENABLE);
+    }
+}
