@@ -1,6 +1,6 @@
 <?php
 /**
- * LogicSpot_Imageload
+ * LogicSpot_ImageLoad
  *
  * NOTICE OF LICENSE
  *
@@ -10,16 +10,16 @@
  * http://www.gnu.org/licenses/gpl-3.0.txt
  *
  * @category    LogicSpot
- * @package     LogicSpot_Imageload
+ * @package     LogicSpot_ImageLoad
  * @copyright   Copyright (c) 2015 LogicSpot (http://www.logicspot.com)
  * @license     http://www.gnu.org/licenses/gpl-3.0.txt GNU General Public License v3.0
  */
 /**
- * Main controller file for Imageload module
+ * Main controller file for ImageLoad module
  *
- * Class LogicSpot_Imageload_IndexController
+ * Class LogicSpot_ImageLoad_IndexController
  */
-class LogicSpot_Imageload_IndexController extends Mage_Core_Controller_Front_Action
+class LogicSpot_ImageLoad_IndexController extends Mage_Core_Controller_Front_Action
 {
     /**
      * Retrieve product image based on the passed url and return as JSON for AJAX call

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * LogicSpot_Imageload
+ * LogicSpot_ImageLoad
  *
  * NOTICE OF LICENSE
  *
@@ -11,30 +11,30 @@
  * http://www.gnu.org/licenses/gpl-3.0.txt
  *
  * @category    LogicSpot
- * @package     LogicSpot_Imageload
+ * @package     LogicSpot_ImageLoad
  * @copyright   Copyright (c) 2015 LogicSpot (http://www.logicspot.com)
  * @license     http://www.gnu.org/licenses/gpl-3.0.txt GNU General Public License v3.0
  */
 -->
 <config>
     <modules>
-        <LogicSpot_Imageload>
+        <LogicSpot_ImageLoad>
             <version>2.1.0</version>
-        </LogicSpot_Imageload>
+        </LogicSpot_ImageLoad>
     </modules>
     <global>
         <helpers>
             <imageload>
-                <class>LogicSpot_Imageload_Helper</class>
+                <class>LogicSpot_ImageLoad_Helper</class>
             </imageload>
         </helpers>
         <resources>
-            <imageload_setup>
+            <logicspot_imageload_setup>
                 <setup>
-                    <module>LogicSpot_Imageload</module>
+                    <module>LogicSpot_ImageLoad</module>
                     <class>Mage_Catalog_Model_Resource_Setup</class>
                 </setup>
-            </imageload_setup>
+            </logicspot_imageload_setup>
         </resources>
     </global>
     <frontend>
@@ -42,7 +42,7 @@
             <imageload>
                 <use>standard</use>
                 <args>
-                    <module>LogicSpot_Imageload</module>
+                    <module>LogicSpot_ImageLoad</module>
                     <frontName>imageload</frontName>
                 </args>
             </imageload>

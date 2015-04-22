@@ -1,4 +1,4 @@
-#Imageload by [LogicSpot]
+#ImageLoad by [LogicSpot]
 
 This module allows to show different images after hovering over image in category view.
 By default module will show SECOND image from image gallery, but it's a possibility of changing hover image in gallery tab.

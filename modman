@@ -1,5 +1,5 @@
-## Modman Module LogicSpot Imageload
-app/code/community/LogicSpot/Imageload/*                  app/code/community/LogicSpot/Imageload
+## Modman Module LogicSpot ImageLoad
+app/code/community/LogicSpot/ImageLoad/*                  app/code/community/LogicSpot/ImageLoad
 app/design/frontend/base/default/layout/logicspot/*       app/design/frontend/base/default/layout/logicspot/
 app/design/frontend/base/default/template/logicspot/*     app/design/frontend/base/default/template/logicspot/
 app/etc/modules/*                                         app/etc/modules/
