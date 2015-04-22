@@ -19,6 +19,7 @@
 $installer = $this;
 $setup = new Mage_Eav_Model_Entity_Setup('core_setup');
 $installer->startSetup();
+$installer->removeAttribute('catalog_product', 'hover_image');
 $this->addAttribute(
     'catalog_product',
     'hover_image',
