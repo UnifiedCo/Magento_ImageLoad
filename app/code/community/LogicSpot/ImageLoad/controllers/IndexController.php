@@ -57,10 +57,15 @@ class LogicSpot_ImageLoad_IndexController extends Mage_Core_Controller_Front_Act
         /** @var Varien_Data_Collection $image */
         $items = $_product->getMediaGalleryImages()->getItems();
         list($image) = array_slice($items, 1, 1);
+
+		$imageObject = new Varien_Image($image->getPath());
+
+		$width = $params['width'] > $imageObject->getOriginalWidth() ? $imageObject->getOriginalWidth() : $params['width'];
+
         if ($hoverImg && $hoverImg != 'no_selection') {
-            $result['img'] = (string)Mage::helper('catalog/image')->init($_product, 'small_image', $hoverImg)->resize($params['width']);
+            $result['img'] = (string)Mage::helper('catalog/image')->init($_product, 'small_image', $hoverImg)->resize($width);
         } else if ($image) {
-            $result['img'] = (string)Mage::helper('catalog/image')->init($_product, 'small_image', $image->getFile())->resize($params['width']);
+            $result['img'] = (string)Mage::helper('catalog/image')->init($_product, 'small_image', $image->getFile())->resize($width);
         } else {
             $result['error'] = true;
         }
