@@ -27,21 +27,31 @@ class LogicSpot_ImageLoad_IndexController extends Mage_Core_Controller_Front_Act
     public function indexAction()
     {
         $params = $this->getRequest()->getParams();
-        $url = str_replace(Mage::getBaseUrl(), '', $params['url']);
+		$url = str_replace(Mage::getBaseUrl(), '', $params['url']);
 
-        $rewriteModel = Mage::getModel('core/url_rewrite')
-            ->setStoreId(Mage::app()->getStore()->getId())
-            ->loadByRequestPath($url);
+		//check if url have id part in it
+		$urlParts = explode('/', $url);
+		if ($i = array_search('id', $urlParts)) {
+			$productId = $urlParts[$i + 1];
+		} else {
+			//try to get the url from rewritten url
+			$rewriteModel = Mage::getModel('core/url_rewrite')
+				->setStoreId(Mage::app()->getStore()->getId())
+				->loadByRequestPath($url);
 
-        //get product id from url
-        $productId = $rewriteModel->getProductId();
-        if (!$productId) {
-            $this->getResponse()->setBody(Mage::helper('core')->jsonEncode(array('error' => true)));
-            return;
-        }
+			//get product id from url
+			$productId = $rewriteModel->getProductId();
+		}
 
-        $result = array('error' => false);
+
+		$result = array('error' => false);
         $_product = Mage::getModel('catalog/product')->load($productId);
+
+		if (!$_product->getId()) {
+			$this->getResponse()->setBody(Mage::helper('core')->jsonEncode(array('error' => true)));
+			return;
+		}
+
         //Get default hover image
         $hoverImg = $_product->getHoverImage();
         /** @var Varien_Data_Collection $image */
