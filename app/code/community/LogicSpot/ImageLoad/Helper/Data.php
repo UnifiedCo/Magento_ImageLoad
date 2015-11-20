@@ -27,7 +27,7 @@ class LogicSpot_ImageLoad_Helper_Data extends Mage_Core_Helper_Data {
      *
      * @return bool
      */
-    public function isModuleEnabled()
+    public function isModuleEnabled($moduleName = null)
     {
         return Mage::getStoreConfigFlag(self::XML_PATH_ENABLE);
     }
