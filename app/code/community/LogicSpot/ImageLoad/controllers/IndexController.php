@@ -27,7 +27,7 @@ class LogicSpot_ImageLoad_IndexController extends Mage_Core_Controller_Front_Act
     public function indexAction()
     {
         $params = $this->getRequest()->getParams();
-		$url = str_replace(Mage::getBaseUrl(), '', $params['url']);
+		$url = trim(parse_url($params['url'], PHP_URL_PATH), '/');
 
 		//check if url have id part in it
 		$urlParts = explode('/', $url);
