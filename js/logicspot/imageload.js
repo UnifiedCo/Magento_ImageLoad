@@ -60,12 +60,17 @@ if (isJqueryEnable() && (!isModernizrEnable() || (isModernizrEnable() && !Modern
                             var getData = $.parseJSON(dataString);
                             //if ajax finished with success, write new image url into data for container
                             if (getData.error == false) {
-                                container.append(container.find('img').clone().attr('src', getData.img).hide());
-                            }
+                                // let browser load new image before showing it on frontend
+                                var image = new Image();
+                                image.src = getData.img;
+                                image.onload = function() {
+                                    container.append(container.find('img').clone().attr('src', getData.img).hide());
 
-                            //do not show new image if customer changed the hover before ajax call was completed
-                            if (container.hasClass('hover')) {
-                                toggleImage(container);
+                                    //do not show new image if customer changed the hover before ajax call was completed
+                                    if (container.hasClass('hover')) {
+                                        toggleImage(container);
+                                    }
+                                }
                             }
                         }
                     });
