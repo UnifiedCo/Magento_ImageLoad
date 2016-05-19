@@ -37,7 +37,7 @@ class LogicSpot_ImageLoad_IndexController extends Mage_Core_Controller_Front_Act
 			//try to get the url from rewritten url
 			$rewriteModel = Mage::getModel('core/url_rewrite')
 				->setStoreId(Mage::app()->getStore()->getId())
-				->loadByRequestPath($url);
+				->loadByRequestPath(array_pop($urlParts));
 
 			//get product id from url
 			$productId = $rewriteModel->getProductId();
