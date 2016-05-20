@@ -56,6 +56,12 @@ if (isJqueryEnable() && (!isModernizrEnable() || (isModernizrEnable() && !Modern
                         type: "GET",
                         url: BASE_URL + "imageload/index/index",
                         data: {url: url, width: width, height: height},
+                        beforeSend: function() {
+                            container.trigger('imageload:start');
+                        },
+                        complete: function() {
+                            container.trigger('imageload:stop');
+                        },
                         success: function (dataString) {
                             var getData = $.parseJSON(dataString);
                             //if ajax finished with success, write new image url into data for container
