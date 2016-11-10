@@ -18,5 +18,7 @@
 <script type="text/javascript">
 //<![CDATA[
     var IMAGELOAD_ENABLE = <?php var_export(Mage::helper('imageload')->isModuleEnabled()); ?>;
+    var IMAGELOAD_METHOD = "<?php echo Mage::helper('imageload')->getLoadingMethod(); ?>";
+    var IMAGELOAD_DATA_ATTRIBUTE = "<?php echo Mage::helper('imageload')->getDataAttributeName(); ?>";
 //]]>
 </script>

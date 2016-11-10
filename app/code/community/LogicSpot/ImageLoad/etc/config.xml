@@ -19,7 +19,7 @@
 <config>
     <modules>
         <LogicSpot_ImageLoad>
-            <version>2.2.0</version>
+            <version>3.0.0</version>
         </LogicSpot_ImageLoad>
     </modules>
     <global>
@@ -28,6 +28,11 @@
                 <class>LogicSpot_ImageLoad_Helper</class>
             </imageload>
         </helpers>
+        <models>
+            <imageload>
+                <class>LogicSpot_ImageLoad_Model</class>
+            </imageload>
+        </models>
         <resources>
             <logicspot_imageload_setup>
                 <setup>
@@ -54,5 +59,19 @@
                 </imageload>
             </updates>
         </layout>
+        <product>
+            <collection>
+                <attributes>
+                    <hover_image />
+                </attributes>
+            </collection>
+        </product>
     </frontend>
+    <default>
+        <logicspot_imageload>
+            <imageload>
+                <data_attribute>data-hover</data_attribute>
+            </imageload>
+        </logicspot_imageload>
+    </default>
 </config>

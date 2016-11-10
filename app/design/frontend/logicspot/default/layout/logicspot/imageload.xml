@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * LogicSpot_ImageLoad
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the GNU General Public License v3.0
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.gnu.org/licenses/gpl-3.0.txt
+ *
+ * @category    LogicSpot
+ * @package     LogicSpot_ImageLoad
+ * @copyright   Copyright (c) 2015 LogicSpot (http://www.logicspot.com)
+ * @license     http://www.gnu.org/licenses/gpl-3.0.txt GNU General Public License v3.0
+ */
+-->
+<layout version="0.1.0">
+    <default>
+        <reference name="delayed_js">
+            <block type="core/template" name="logicspot.imageload" as="imageload" before="-" template="logicspot/imageload/imageload.phtml" />
+        </reference>
+    </default>
+    <catalog_category_default>
+        <reference name="delayed_js">
+            <action method="addJs"><script>logicspot/imageload.js</script></action>
+        </reference>
+    </catalog_category_default>
+    <catalog_category_layered>
+        <reference name="delayed_js">
+            <action method="addJs"><script>logicspot/imageload.js</script></action>
+        </reference>
+    </catalog_category_layered>
+</layout>

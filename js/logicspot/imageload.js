@@ -24,13 +24,17 @@ function isModernizrEnable() {
  * Function that replaces visible image with the retrieved hidden one.
  * @param container
  */
-function toggleImage(container) {
-    var visibleImg = container.find('img:visible');
-    var hiddenImg  = container.find('img:hidden');
-    if (hiddenImg.length != 0) {
-        visibleImg.hide();
-        hiddenImg.show();
-    }
+function showHover(container) {
+    var hoverImg = container.find('img.hover-img');
+    var otherImg  = container.find('img:not(.hover-img)');
+    hoverImg.removeClass('hide');
+    otherImg.addClass('hide');
+}
+function showOther(container) {
+    var hoverImg = container.find('img.hover-img');
+    var otherImg  = container.find('img:not(.hover-img)').first();
+    hoverImg.addClass('hide');
+    otherImg.removeClass('hide');
 }
 if (isJqueryEnable() && (!isModernizrEnable() || (isModernizrEnable() && !Modernizr.touch))) {
     jQuery(document).ready(function($) {
@@ -39,59 +43,91 @@ if (isJqueryEnable() && (!isModernizrEnable() || (isModernizrEnable() && !Modern
                 if (!IMAGELOAD_ENABLE) {
                     return false;
                 }
-                var container = $(this).find('a.product-image');
+                var container = $(this);
                 container.addClass('hover');
                 //if there is no image loaded, load using ajax
                 if (!container.hasClass('img-loaded')) {
-                    var url = container.attr('href');
-                    // Create new offscreen image to get it's actual width and height (needed for responsive layouts)
-                    var testImage = new Image();
-                    testImage.src = container.find('img').attr("src");
-                    var width = testImage.width;
-                    var height = testImage.height;
-
-                    container.addClass('img-loaded');
-
-                    $.ajax({
-                        type: "GET",
-                        url: BASE_URL + "imageload/index/index",
-                        data: {url: url, width: width, height: height},
-                        beforeSend: function() {
-                            container.trigger('imageload:start');
-                        },
-                        complete: function() {
-                            container.trigger('imageload:stop');
-                        },
-                        success: function (dataString) {
-                            var getData = $.parseJSON(dataString);
-                            //if ajax finished with success, write new image url into data for container
-                            if (getData.error == false) {
-                                // let browser load new image before showing it on frontend
-                                var image = new Image();
-                                image.src = getData.img;
-                                image.onload = function() {
-                                    container.append(container.find('img').clone().attr('src', getData.img).hide());
-
-                                    //do not show new image if customer changed the hover before ajax call was completed
-                                    if (container.hasClass('hover')) {
-                                        toggleImage(container);
-                                    }
-                                }
-                            }
-                        }
-                    });
+                    if (IMAGELOAD_METHOD == 1) {
+                        initHoverMethod(container);
+                    }
+                    if (IMAGELOAD_METHOD == 3) {
+                        initDataAttributeMethod(container);
+                    }
                 } else {
-                    toggleImage(container);
+                    showHover(container);
                 }
             },
             mouseleave: function () {
                 //show old image
-                var container = $(this).find('a.product-image');
+                var container = $(this);
                 container.removeClass('hover');
                 if (container.hasClass('img-loaded')) {
-                    toggleImage(container);
+                    showOther(container);
                 }
             }
-        }, ".category-products .item");
+        }, ".category-products .item .product-image");
     })
+}
+
+
+function initHoverMethod(container) {
+    var url = container.attr('href');
+    // Create new offscreen image to get it's actual width and height (needed for responsive layouts)
+    var testImage = new Image();
+    testImage.src = container.find('img').attr("src");
+    var width = testImage.width;
+    var height = testImage.height;
+
+    container.addClass('img-loaded');
+
+    jQuery.ajax({
+        type: "GET",
+        url: BASE_URL + "imageload/index/index",
+        data: {url: url, width: width, height: height},
+        beforeSend: function() {
+            container.trigger('imageload:start');
+        },
+        complete: function() {
+            container.trigger('imageload:stop');
+        },
+        success: function (dataString) {
+            var getData = jQuery.parseJSON(dataString);
+            //if ajax finished with success, write new image url into data for container
+            if (getData.error == false) {
+                // let browser load new image before showing it on frontend
+                var image = new Image();
+                image.src = getData.img;
+                image.onload = function() {
+                    container.append(container.find('img').clone().removeAttr('id').attr('src', getData.img).addClass('hover-img hide'));
+
+                    //do not show new image if customer changed the hover before ajax call was completed
+                    if (container.hasClass('hover')) {
+                        showHover(container);
+                    }
+                }
+            }
+        }
+    });
+}
+
+function initDataAttributeMethod(container) {
+    var imageSrc = container.find('img').data('hover');
+
+    if (typeof imageSrc == 'undefined') {
+        return false;
+    }
+
+    container.addClass('img-loaded');
+
+    // let browser load new image before showing it on frontend
+    var image = new Image();
+    image.src = imageSrc;
+    image.onload = function() {
+        container.append(container.find('img').clone().removeAttr('id').attr('src', imageSrc).addClass('hover-img hide'));
+
+        //do not show new image if customer changed the hover before ajax call was completed
+        if (container.hasClass('hover')) {
+            showHover(container);
+        }
+    }
 }

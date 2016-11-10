@@ -21,6 +21,8 @@
  */
 class LogicSpot_ImageLoad_Helper_Data extends Mage_Core_Helper_Data {
     const XML_PATH_ENABLE = 'logicspot_imageload/imageload/enable';
+    const XML_LOADING_METHOD = 'logicspot_imageload/imageload/method';
+    const XML_DATA_ATTR_NAME = 'logicspot_imageload/imageload/data_attribute';
 
     /**
      * Determine if module is enabled.
@@ -30,5 +32,54 @@ class LogicSpot_ImageLoad_Helper_Data extends Mage_Core_Helper_Data {
     public function isModuleEnabled($moduleName = null)
     {
         return Mage::getStoreConfigFlag(self::XML_PATH_ENABLE);
+    }
+
+    /**
+     * Return module loading method
+     *
+     * @return bool
+     */
+    public function getLoadingMethod()
+    {
+        return Mage::getStoreConfig(self::XML_LOADING_METHOD);
+    }
+
+    /**
+     * Return data attribute name for Data method
+     *
+     * @return bool
+     */
+    public function getDataAttributeName()
+    {
+        return Mage::getStoreConfig(self::XML_DATA_ATTR_NAME);
+    }
+
+    /**
+     * Return default hover image for product or throw an error
+     *
+     * @param Mage_Catalog_Model_Product $product
+     * @param int $width Width of the image
+     * @param int $height Height of the image
+     * @return string Url for the hover image
+     * @throws Exception
+     */
+    public function getHoverImage(Mage_Catalog_Model_Product $product, $width, $height = null) {
+        $hoverImg = $product->getHoverImage();
+        /** @var Varien_Data_Collection $image */
+        $items = $product->getMediaGalleryImages()->getItems();
+        list($image) = array_slice($items, 1, 1);
+
+        $imageObject = new Varien_Image($image->getPath());
+
+        $width = $width > $imageObject->getOriginalWidth() ? $imageObject->getOriginalWidth() : $width;
+        $height = $height > $imageObject->getOriginalWidth() ? $imageObject->getOriginalWidth() : $height;
+
+        if ($hoverImg && $hoverImg != 'no_selection') {
+            return (string)Mage::helper('catalog/image')->init($product, 'small_image', $hoverImg)->resize($width, $height);
+        } else if ($image) {
+            return (string)Mage::helper('catalog/image')->init($product, 'small_image', $image->getFile())->resize($width, $height);
+        } else {
+            throw new Exception("Error finding image");
+        }
     }
 }
