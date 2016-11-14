@@ -64,6 +64,11 @@ class LogicSpot_ImageLoad_Helper_Data extends Mage_Core_Helper_Data {
      */
     public function getHoverImage(Mage_Catalog_Model_Product $product, $width, $height = null) {
         $hoverImg = $product->getHoverImage();
+
+        if (!$product->getMediaGalleryImages()) {
+            return null;
+        }
+
         /** @var Varien_Data_Collection $image */
         $items = $product->getMediaGalleryImages()->getItems();
         list($image) = array_slice($items, 1, 1);
