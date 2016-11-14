@@ -113,7 +113,7 @@ function initHoverMethod(container) {
 function initDataAttributeMethod(container) {
     var imageSrc = container.find('img').data('hover');
 
-    if (typeof imageSrc == 'undefined') {
+    if (typeof imageSrc == 'undefined' || imageSrc == '') {
         return false;
     }
 
