@@ -60,8 +60,7 @@ class LogicSpot_ImageLoad_Helper_Data extends Mage_Core_Helper_Data {
      * @param Mage_Catalog_Model_Product $product
      * @param int $width Width of the image
      * @param int $height Height of the image
-     * @return string Url for the hover image
-     * @throws Exception
+     * @return string|null Url for the hover image
      */
     public function getHoverImage(Mage_Catalog_Model_Product $product, $width, $height = null) {
         $hoverImg = $product->getHoverImage();
@@ -69,7 +68,11 @@ class LogicSpot_ImageLoad_Helper_Data extends Mage_Core_Helper_Data {
         $items = $product->getMediaGalleryImages()->getItems();
         list($image) = array_slice($items, 1, 1);
 
-        $imageObject = new Varien_Image($image->getPath());
+        try {
+            $imageObject = new Varien_Image($image->getPath());
+        } catch (Exception $e) {
+            return null;
+        }
 
         $width = $width > $imageObject->getOriginalWidth() ? $imageObject->getOriginalWidth() : $width;
         $height = $height > $imageObject->getOriginalWidth() ? $imageObject->getOriginalWidth() : $height;
@@ -79,7 +82,7 @@ class LogicSpot_ImageLoad_Helper_Data extends Mage_Core_Helper_Data {
         } else if ($image) {
             return (string)Mage::helper('catalog/image')->init($product, 'small_image', $image->getFile())->resize($width, $height);
         } else {
-            throw new Exception("Error finding image");
+            return null;
         }
     }
 }

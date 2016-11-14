@@ -52,9 +52,8 @@ class LogicSpot_ImageLoad_IndexController extends Mage_Core_Controller_Front_Act
 			return;
 		}
 
-        try {
-            $result['img'] = Mage::helper('imageload')->getHoverImage($_product, $params['width']);
-        } catch (Exception $e) {
+        $result['img'] = Mage::helper('imageload')->getHoverImage($_product, $params['width']);
+        if (is_null($result['img'])) {
             $result['error'] = true;
         }
 
