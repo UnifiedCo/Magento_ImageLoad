@@ -62,19 +62,23 @@ class LogicSpot_ImageLoad_Helper_Data extends Mage_Core_Helper_Data {
      * @param int $height Height of the image
      * @return string|null Url for the hover image
      */
-    public function getHoverImage(Mage_Catalog_Model_Product $product, $width, $height = null) {
+    public function getHoverImage(Mage_Catalog_Model_Product $product, $width, $height = null)
+    {
         $hoverImg = $product->getHoverImage();
+        if ($hoverImg && $hoverImg != 'no_selection') {
+            return (string)Mage::helper('catalog/image')->init($product, 'small_image', $hoverImg)->resize($width, $height);
+        }
+
+        $product->load('media_gallery');
         if (!$product->getMediaGalleryImages()) {
             return null;
         }
-
-        /** @var Varien_Data_Collection $image */
+        /* @var Varien_Data_Collection $image */
         $items = $product->getMediaGalleryImages()->getItems();
         list($image) = array_slice($items, 1, 1);
         if (!$image) {
             return null;
         }
-
 
         try {
             $imageObject = new Varien_Image($image->getPath());
@@ -85,12 +89,6 @@ class LogicSpot_ImageLoad_Helper_Data extends Mage_Core_Helper_Data {
         $width = $width > $imageObject->getOriginalWidth() ? $imageObject->getOriginalWidth() : $width;
         $height = $height > $imageObject->getOriginalWidth() ? $imageObject->getOriginalWidth() : $height;
 
-        if ($hoverImg && $hoverImg != 'no_selection') {
-            return (string)Mage::helper('catalog/image')->init($product, 'small_image', $hoverImg)->resize($width, $height);
-        } else if ($image) {
-            return (string)Mage::helper('catalog/image')->init($product, 'small_image', $image->getFile())->resize($width, $height);
-        } else {
-            return null;
-        }
+        return (string)Mage::helper('catalog/image')->init($product, 'small_image', $image->getFile())->resize($width, $height);
     }
 }
