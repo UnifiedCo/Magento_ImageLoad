@@ -19,7 +19,7 @@
 <config>
     <modules>
         <LogicSpot_ImageLoad>
-            <version>3.0.0</version>
+            <version>3.0.1</version>
         </LogicSpot_ImageLoad>
     </modules>
     <global>

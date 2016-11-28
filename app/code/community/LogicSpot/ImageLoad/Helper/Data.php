@@ -80,15 +80,6 @@ class LogicSpot_ImageLoad_Helper_Data extends Mage_Core_Helper_Data {
             return null;
         }
 
-        try {
-            $imageObject = new Varien_Image($image->getPath());
-        } catch (Exception $e) {
-            return null;
-        }
-
-        $width = $width > $imageObject->getOriginalWidth() ? $imageObject->getOriginalWidth() : $width;
-        $height = $height > $imageObject->getOriginalWidth() ? $imageObject->getOriginalWidth() : $height;
-
         return (string)Mage::helper('catalog/image')->init($product, 'small_image', $image->getFile())->resize($width, $height);
     }
 }
