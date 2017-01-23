@@ -123,7 +123,7 @@ function initDataAttributeMethod(container) {
     var image = new Image();
     image.src = imageSrc;
     image.onload = function() {
-        container.append(container.find('img:fist').clone().removeAttr('id').attr('src', imageSrc).addClass('hover-img hide'));
+        container.append(container.find('img:first').clone().removeAttr('id').attr('src', imageSrc).addClass('hover-img hide'));
 
         //do not show new image if customer changed the hover before ajax call was completed
         if (container.hasClass('hover')) {
