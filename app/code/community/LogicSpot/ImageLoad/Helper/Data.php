@@ -80,6 +80,12 @@ class LogicSpot_ImageLoad_Helper_Data extends Mage_Core_Helper_Data {
             return null;
         }
 
-        return (string)Mage::helper('catalog/image')->init($product, 'small_image', $image->getFile())->resize($width, $height);
+        $hoverImg = (string)Mage::helper('catalog/image')->init($product, 'small_image', $image->getFile())->resize($width, $height);
+
+        if (file_exists($image->getData('path'))) {
+            return $hoverImg;
+        }
+
+        return null;
     }
 }
